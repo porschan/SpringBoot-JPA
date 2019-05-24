@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+curd page
+
+<h1>添加</h1>
+
+<form action="add" method="post">
+    <p>
+        <label>姓名：</label>
+        <input type="text" name="name" id="name"/>
+    </p>
+    <p>
+        <label>密码：</label>
+        <input type="password" name="password" id="password"/>
+    </p>
+
+
+    <p>
+        <input type="submit" value="添加">
+    </p>
+</form>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>操作</th>
+    </tr>
+
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <a th:href="@{delete/} + ${user.id}">删除</a>
+            <a th:href="@{queryById/} + ${user.id}">修改</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
