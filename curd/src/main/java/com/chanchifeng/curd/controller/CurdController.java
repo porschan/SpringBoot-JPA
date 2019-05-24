@@ -2,11 +2,10 @@ package com.chanchifeng.curd.controller;
 
 import com.chanchifeng.curd.model.User;
 import com.chanchifeng.curd.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -18,8 +17,6 @@ public class CurdController {
 
     @Resource
     private UserService userService;
-
-
 
     @GetMapping("/queryAll")
     public String queryAll(Model model) {
@@ -76,5 +73,17 @@ public class CurdController {
 
         return "redirect:/curdController/queryAll";
     }
+
+    /* START 模糊搜索 + 分页*/
+
+    @RequestMapping(value="/findAllJSON")
+    @ResponseBody
+    public Page<User> findAllJson(User user, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        System.out.println();
+        Page<User> all = userService.findAll(page, limit, user);
+
+        return all;
+    }
+    /* END 模糊搜索 + 分页*/
 
 }

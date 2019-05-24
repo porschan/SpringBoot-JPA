@@ -55,4 +55,20 @@ public class CurdApplicationTests {
         userService.delete(4);
     }
 
+    @Test
+    public void findAllPageTest(){
+
+        User user = new User();
+        user.setName("1");
+
+        System.out.println("test");
+
+        Page<User> allPage = userService.findAll(1, 10, user);
+        System.out.println(allPage.getTotalElements() + "!");
+
+        List<User> content = allPage.getContent();
+        content.stream().forEach(c -> System.out.println(c.getName() + "!!"));
+
+    }
+
 }

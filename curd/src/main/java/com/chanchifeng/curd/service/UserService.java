@@ -19,4 +19,7 @@ public interface UserService {
     List<User> findByName(String name);
     List<User> findByNameLike(String name);
     List<User> findByIdIn(Collection<Integer> ids);
+
+    Page<User> findAll(int pageNum, int pageSize, User user);
+//    Page<User> findAllPage(Specification<User> specification,Pageable pageable);
 }
